@@ -1,4 +1,5 @@
 const myLibrary = [];
+let table = document.querySelector('tbody');
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -10,17 +11,17 @@ function Book(title, author, pages, read) {
     };
 }
 
-// let book1 = new Book('book1', 'auth1', 1, 'read');
-// let book2 = new Book('book2', 'auth2', 2, 'not yet read');
-// addBookToLibrary(book1);
-// addBookToLibrary(book2);
+Book.prototype.toggle = function() {
+  this.read = (this.read == 'Read') ? 'Not Yet Read' : 'Read';
+  table.replaceChildren();
+  displayLibrary(myLibrary);
+}
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
 function displayLibrary(library) {
-    let table = document.querySelector('tbody');
     for (let i = 0; i < library.length; i++) {        
         let book = document.createElement('tr');
 
@@ -31,12 +32,20 @@ function displayLibrary(library) {
           table.removeChild(book);
           myLibrary.splice(i, 1);
         });
+
+        let tog = document.createElement('button');
+        tog.textContent = 'Toggle';
+        tog.addEventListener('click', () => {
+          library[i].toggle();
+        });
+
         for (let key in library[i]) {
             if (typeof library[i][key] == 'function') continue;
             let entry = document.createElement('td');
             entry.textContent = library[i][key];
             book.appendChild(entry);                    
         }
+        book.appendChild(tog);
         book.appendChild(del);
         table.appendChild(book);
     }    
@@ -58,7 +67,6 @@ close.addEventListener("click", () => {
 
 submit.addEventListener("click", (event) => {
   event.preventDefault();
-  let table = document.querySelector('tbody');
   let title = document.querySelector('#title').value;
   let author = document.querySelector('#author').value;
   let pages = document.querySelector("input[type='number']").value;
