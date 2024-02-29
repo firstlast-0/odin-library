@@ -20,15 +20,24 @@ function addBookToLibrary(book) {
 }
 
 function displayLibrary(library) {
-    let table = document.querySelector('table');
+    let table = document.querySelector('tbody');
     for (let i = 0; i < library.length; i++) {        
         let book = document.createElement('tr');
+
+        book.setAttribute('data-index', i);
+        let del = document.createElement('button');
+        del.textContent = 'Delete';
+        del.addEventListener('click', () => {
+          table.removeChild(book);
+          myLibrary.splice(i, 1);
+        });
         for (let key in library[i]) {
             if (typeof library[i][key] == 'function') continue;
             let entry = document.createElement('td');
             entry.textContent = library[i][key];
-            book.appendChild(entry);
+            book.appendChild(entry);                    
         }
+        book.appendChild(del);
         table.appendChild(book);
     }    
 }
@@ -49,19 +58,15 @@ close.addEventListener("click", () => {
 
 submit.addEventListener("click", (event) => {
   event.preventDefault();
+  let table = document.querySelector('tbody');
   let title = document.querySelector('#title').value;
   let author = document.querySelector('#author').value;
   let pages = document.querySelector("input[type='number']").value;
   let read = (document.querySelector('#read').checked) ? 'Read' : 'Not Yet Read';
 
-  let del = document.createElement('button');
-  del.textContent = 'Delete';
-  del.addEventListener('click', () => {
-    ul.removeChild(li);
-  });
-
   let book = new Book(title, author, pages, read);
   addBookToLibrary(book);
+  table.replaceChildren();
   displayLibrary(myLibrary);
   dialog.close();
 });
