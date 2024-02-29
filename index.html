@@ -14,8 +14,26 @@
             <th>Author</th>
             <th>Pages</th>
             <th>Read</th>
+            <th>Delete</th>
         </tr>
 
     </table>
+
+    <dialog>
+        <form>
+            <fieldset>
+                <legend>Enter Book details</legend>
+                <input id="title" type="text" placeholder="Title">
+                <input id="author" type="text" placeholder="Author">
+                <input type="number" placeholder="0">
+                <input id="read" type="checkbox" name="read">
+                <label for="read">Read</label>                
+                <br><br>
+                <button id="sub">SUBMIT</button>
+                <button id="can" type="button">CANCEL</button>
+            </fieldset>
+        </form>
+    </dialog>
+    <button>NEW BOOK</button>
 </body>
 </html>
