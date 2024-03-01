@@ -53,7 +53,7 @@ function displayLibrary(library) {
 displayLibrary(myLibrary);
 
 let dialog = document.querySelector('dialog');
-let newBook = document.querySelector('dialog + button');
+let newBook = document.querySelector('body > button');
 let submit = document.querySelector('#sub');
 let close = document.querySelector('#can');
 

@@ -4,6 +4,32 @@ body {
     color: white;
 }
 
-table {
+table, body > button {
     margin: auto;
+}
+
+th, td {
+    border: 2px solid white;
+}
+
+table {
+    border-bottom: 0;
+    text-align: center;
+}
+
+tr {
+    max-height: 75px;
+}
+
+th {
+    width: 165px;
+    border-style: dashed;
+}
+
+thead {
+    font-size: 1.5rem;
+}
+
+button {
+    display: block;
 }
