@@ -48,8 +48,9 @@ function displayLibrary(library) {
         let del = document.createElement('button');
         del.textContent = 'Delete';
         del.addEventListener('click', () => {
-          table.removeChild(book);
-          myLibrary.splice(i, 1);
+          library.splice(i, 1);
+          table.replaceChildren();
+          displayLibrary(library);
         });
 
         let tog = document.createElement('button');
@@ -74,6 +75,7 @@ displayLibrary(myLibrary);
 let dialog = document.querySelector('dialog');
 let newBook = document.querySelector('body > button');
 let submit = document.querySelector('#sub');
+let form = document.querySelector('form');
 let close = document.querySelector('#can');
 
 newBook.addEventListener("click", () => {
@@ -84,7 +86,15 @@ close.addEventListener("click", () => {
   dialog.close();
 });
 
-submit.addEventListener("click", (event) => {
+form.addEventListener("submit", (event) => {
+  // let title_ = document.querySelector('#title');
+
+  // if (title_.validity.valueMissing) {
+  //   email.setCustomValidity("I am expecting an email address!");
+  // } else {
+  //   email.setCustomValidity("");
+  // }
+  
   event.preventDefault();
   let title = document.querySelector('#title').value;
   let author = document.querySelector('#author').value;
